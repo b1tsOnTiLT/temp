@@ -10,8 +10,9 @@ import aiohttp
 import logging
 from dotenv import load_dotenv
 import os
-load_dotenv()
-GOOGLE_API = os.getenv('GOOGLE_API')
+import streamlit as st
+
+GOOGLE_API=st.secrets["api"]["google"]
 
 # Configure logger with custom format: |time|error|description
 logging.basicConfig(
