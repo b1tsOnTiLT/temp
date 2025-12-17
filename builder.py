@@ -12,7 +12,8 @@ from dotenv import load_dotenv
 import os
 import streamlit as st
 
-GOOGLE_API=st.secrets["api"]["google"]
+GOOGLE_API=st.secrets["google"]["api_key"]
+OPEN_AI_API=st.secrets["open_ai"]["api_key"]
 
 # Configure logger with custom format: |time|error|description
 logging.basicConfig(
