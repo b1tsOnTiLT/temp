@@ -4,11 +4,14 @@ import numpy as np
 import datetime
 import pandas as pd
 from prompts import SYSTEM_PROMPT, CONTEXT_PROMPT
-from api import OPEN_AI_API
+from dotenv import load_dotenv
+import os
 
 
-client=OpenAI(api_key=OPEN_AI_API)
+load_dotenv()
 
+GOOGLE_API = os.getenv('GOOGLE_API')
+OPEN_AI_API = os.getenv('OPEN_AI_API')
 
 
 
