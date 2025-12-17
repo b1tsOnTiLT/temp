@@ -9,16 +9,15 @@ import requests
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 from chatbot import get_response
-from dotenv import load_dotenv
-import os
+
 
 LAT_MIN = 28.20  # South: Covers Manesar & Southern Gurgaon
 LAT_MAX = 28.90  # North: Covers Narela & North Delhi border
 LON_MIN = 76.80  # West: Covers Manesar & Dwarka Expressway
 LON_MAX = 77.70  # East: Covers Narela & North Delhi border
 
-GOOGLE_API = st.secrets["api"]["google"]
-OPEN_AI_API =  st.secrets["api"]["open_ai"]
+GOOGLE_API = st.secrets["google"]["api_key"]
+OPEN_AI_API =  st.secrets["open_ai"]["api_key"]
 
 def get_PM25_subindex(x):
     if x <= 30:
