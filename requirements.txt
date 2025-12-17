@@ -1,0 +1,10 @@
+streamlit
+numpy
+pandas
+joblib
+requests
+plotly
+matplotlib
+openai
+aiohttp
+python-dotenv
