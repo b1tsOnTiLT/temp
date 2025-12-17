@@ -26,16 +26,13 @@ logger = logging.getLogger(__name__)
 
 feature_dic={'Benzene (µg/m³)': {'lag': [3], 'mean': [2, 24, 48, 6], 'std': [2, 24, 48, 6]}, 'CO (mg/m³)': {'lag': [5], 'mean': [2, 24, 48, 6], 'std': [24, 6]}, 'NH3 (µg/m³)': {'mean': [2, 24, 6], 'std': [48]}, 'NO (µg/m³)': {'std': [2, 6]}, 'NO2 (µg/m³)': {'lag': [1, 3, 5], 'mean': [24, 6], 'std': [2, 24, 48, 6]}, 'NOx (ppb)': {'lag': [1, 3, 5], 'mean': [24, 48, 6], 'std': [2, 24, 48, 6]}, 'Ozone (µg/m³)': {'lag': [1], 'mean': [48]}, 'PM10 (µg/m³)': {'lag': [1, 168, 2, 24, 5], 'mean': [12, 168, 24, 6], 'std': [12, 168, 2, 24, 48, 6]}, 'PM2.5 (µg/m³)': {'lag': [1, 168, 2, 24], 'mean': [168, 24], 'std': [24, 48, 6]}, 'Predictions t+1': {'base': True}, 'Predictions t+2': {'base': True}, 'Predictions t+3': {'base': True}, 'Predictions t+4': {'base': True}, 'Predictions t+5': {'base': True}, 'Predictions t+6': {'base': True}, 'Predictions t+7': {'base': True}, 'SO2 (µg/m³)': {'mean': [2, 24, 6], 'std': [24, 48]}, 'covid': {'base': True}, 'hour_cos': {'base': True, 't+': [2, 3, 4, 5, 6, 7, 8]}, 'hour_sin': {'base': True, 't+': [2, 3, 4, 5, 6, 7]}, 'lat': {'base': True}, 'long': {'base': True}, 'master': {'base': True, 't+': [2, 3, 4, 5, 6, 8], 'mean': [24, 6], 'std': [24, 6]}, 'master_2': {'t+': [2, 3, 4, 5, 6, 7, 8], 'mean': [6]}, 'master_3': {'base': True, 't+': [2, 3, 4, 5, 6, 7, 8], 'mean': [24, 3, 6], 'std': [24]}, 'master_4': {'base': True, 't+': [2, 3, 4, 5, 6, 7, 8], 'mean': [24, 3, 6], 'std': [24, 3, 6]}, 'month_cos': {'base': True}, 'month_sin': {'base': True}, 'rain (mm)': {'lag': [3], 'sum': [12, 24, 3, 48]}, 'relative_humidity_2m (%)': {'base': True, 't+': [2, 3, 4, 5, 6, 7, 8], 'lag': [1, 3, 5], 'mean': [24], 'std': [48, 6]}, 'rush_hour': {'base': True, 't+': [2, 3, 4, 5, 6, 7, 8]}, 'temperature_2m (°C)': {'base': True, 't+': [2, 3, 4, 5], 'lag': [5], 'mean': [24, 6], 'std': [2, 24, 6]}, 'weekday_cos': {'base': True, 't+': [3, 4, 5, 7, 8]}, 'weekday_sin': {'t+': [8]}, 'wind_direction_100m (°)_cos': {'mean': [48], 'std': [48]}, 'wind_direction_100m (°)_sin': {'t+': [2, 3, 4, 5, 6], 'lag': [1, 3], 'mean': [48], 'std': [24, 48]}, 'wind_direction_10m (°)_cos': {'lag': [5]}, 'wind_gusts_10m (km/h)': {'base': True, 't+': [2, 3, 4, 5, 6, 7, 8], 'lag': [1], 'mean': [24, 48, 6], 'std': [24, 48]}, 'wind_speed_100m (km/h)': {'base': True, 'mean': [48, 6], 'std': [24, 48]}, 'wind_speed_10m (km/h)': {'t+': [5], 'mean': [6], 'std': [48]}}
 
-def get_indian_time():
-    """Get current time in Indian Standard Time (IST)"""
-    ist = pytz.timezone('Asia/Kolkata')
-    return datetime.now(ist)
+
 
 class Builder():
     def __init__(self,lattitude,longitude):
         self.lat=lattitude
         self.long=longitude
-        self.curr_time=pd.to_datetime(get_indian_time()).floor('h')
+        self.curr_time=pd.to_datetime(datetime.now())+pd.Timedelta(hours=5.5)).floor('h')
         self.final_model_dic={}
         self.critical_errors=[]
         self.errors=[]
