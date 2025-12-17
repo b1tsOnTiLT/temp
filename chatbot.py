@@ -91,7 +91,7 @@ def get_response(message, aqi_live_dic, location, conversation_history=None):
 
 def create_windows(aqi_live_dic):
     windows={}
-    curr_hour=datetime.datetime.now().hour
+    curr_hour=((pd.to_datetime(datetime.now())+pd.Timedelta(hours=5.5)).floor('h')).hour
     for i in range(1,8):
         h=curr_hour+i
         window_bench=[aqi_live_dic[k] for k in range(i-1, i+2)]  # List of values for h-1, h, h+1
