@@ -26,7 +26,7 @@ class Predictor():
         
     
     def build_model(self,poll,time_step):
-        path=f'./models/model_{poll}_t+{time_step}.pkl'
+        path=f'./model_og/model_{poll}_t+{time_step}.pkl'
         model=joblib.load(path)
         return model
     
