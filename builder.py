@@ -32,7 +32,7 @@ class Builder():
     def __init__(self,lattitude,longitude):
         self.lat=lattitude
         self.long=longitude
-        self.curr_time=pd.to_datetime(datetime.now())+pd.Timedelta(hours=5.5)).floor('h')
+        self.curr_time=(pd.to_datetime(datetime.now())+pd.Timedelta(hours=5.5)).floor('h')
         self.final_model_dic={}
         self.critical_errors=[]
         self.errors=[]
