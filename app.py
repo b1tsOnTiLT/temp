@@ -149,11 +149,6 @@ def escape_html(text):
         return ""
     return html.escape(str(text))
 
-def get_indian_time():
-    """Get current time in Indian Standard Time (IST)"""
-    ist = pytz.timezone('Asia/Kolkata')
-    return datetime.now(ist)
-
 
 
 
@@ -390,7 +385,7 @@ if st.session_state.aqi_data and st.session_state.predictions_data:
     
     # Create time labels (t to t+8)
     time_labels = []
-    base_time=pd.to_datetime(get_indian_time()).floor('h')
+    base_time=(pd.to_datetime(datetime.now())+pd.Timedelta(hours=5.5)).floor('h')
     for i in range(9):
         time_labels.append(base_time + pd.Timedelta(hours=i))
     
