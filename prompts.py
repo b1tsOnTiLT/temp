@@ -101,6 +101,7 @@ CONTEXT_PROMPT=f"""
       state that AQI forecast is available only up to that hour and provide that data. Do not make up any other information.  
     - If a specific time mentioned by the user is in the future of the forecasted 8 hours, say that AQI forecast is available only upto the final window, and provide that information.
     - If the user asks a vague AQI trend in the next hours, provide them with the mean AQI you will be provided.
+    - If you provide a specific window, or advice, always add the context that this applies only for the next 8 hours , upto the given time- hence if someone asks-" best time to go out today", mention that your response is with respoect to the next 8 hours, upto the given time.
 
     </Time interpretation>
 
