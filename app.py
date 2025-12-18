@@ -184,7 +184,7 @@ st.markdown("""
         
         /* Deep blue gradient background to match Breezo branding */
         .stApp {
-            background: linear-gradient(135deg, #0b1f2f 0%, #0a3d5c 50%, #0a2033 100%);
+            background: linear-gradient(135deg, #041126 0%, #0a2f55 50%, #082341 100%);
         }
         
         /* Center heading */
@@ -283,12 +283,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Centered Breezo logo header
-st.markdown(
-    "<div style='display:flex; justify-content:center; margin-top:4px; margin-bottom:12px;'>"
-    "<img src='breezologo.png' alt='Breezo' style='max-width:360px; width:90%; height:auto;'>"
-    "</div>",
-    unsafe_allow_html=True
-)
+header_left, header_center, header_right = st.columns([1, 2, 1])
+with header_center:
+    st.image("breezologo.png", use_container_width=False, width=320)
 st.markdown("<br>", unsafe_allow_html=True)
 
 # Initialize session state
