@@ -559,21 +559,22 @@ if st.session_state.aqi_data and st.session_state.predictions_data:
             paper_bgcolor='#FFFFFF',
             hovermode='x unified',
             legend=dict(
-                orientation="v",
-                yanchor="top",
-                y=1,
-                xanchor="left",
-                x=1.02,
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="center",
+                x=0.5,
                 font=dict(size=11, color='#1a237e', family='Source Serif Pro'),
                 bgcolor='rgba(255, 255, 255, 0.9)',
                 bordercolor='#BDBDBD',
                 borderwidth=1
             ),
             height=500,
-            margin=dict(l=60, r=60, t=60, b=60)
+            # Reduced margins to let the chart fill the container
+            margin=dict(l=20, r=10, t=80, b=40)
         )
         
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
 
 # Initialize chatbot response in session state
 if 'chatbot_response' not in st.session_state:
