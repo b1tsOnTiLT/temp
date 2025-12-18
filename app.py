@@ -298,8 +298,15 @@ st.markdown("""
         /* Hide Plotly legend on small screens to keep the chart uncluttered */
         @media (max-width: 768px) {
             .js-plotly-plot .legend,
-            .js-plotly-plot .g-legend {
+            .js-plotly-plot .g-legend,
+            .js-plotly-plot g[class*="legend"] {
                 display: none !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+                height: 0 !important;
+                width: 0 !important;
+                overflow: hidden !important;
             }
         }
     </style>
