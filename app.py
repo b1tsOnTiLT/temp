@@ -282,10 +282,15 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Centered Breezo logo header
-header_left, header_center, header_right = st.columns([1, 2, 1])
-with header_center:
-    st.image("breezologo.png", use_container_width=False, width=320)
+# Centered Breezo logo header (responsive)
+st.markdown(
+    """
+    <div style="width:100%; display:flex; justify-content:center; align-items:center; margin: 4px 0 12px 0;">
+        <img src="breezologo.png" alt="Breezo" style="display:block; margin:0 auto; max-width:320px; width:80%; height:auto;">
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 st.markdown("<br>", unsafe_allow_html=True)
 
 # Initialize session state
