@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="breezologo.png" alt="Breezo Logo" style="width: 100%; max-width: 300px;">
+  <img src="breezologo.png" alt="Breezo Logo" ; max-width: 300px;">
 </p>
 
 
