@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 from chatbot import get_response
 import html
 import pytz
+import base64
+import os
 
 
 LAT_MIN = 28.20  # South: Covers Manesar & Southern Gurgaon
@@ -165,12 +167,25 @@ def escape_html(text):
         return ""
     return html.escape(str(text))
 
+def get_img_as_base64(file_path):
+    """Read binary image and return base64 string for inline rendering"""
+    with open(file_path, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
 
 
 
 
 # Streamlit App
 st.set_page_config(page_title="Air Quality Index Dashboard", layout="wide")
+
+# Load Breezo logo as base64 for reliable inline rendering
+try:
+    LOGO_B64 = get_img_as_base64("breezologo.png")
+except FileNotFoundError:
+    st.error("Error: 'breezologo.png' not found. Please ensure the file is in the app directory.")
+    st.stop()
 
 # Custom CSS for styling
 st.markdown("""
@@ -282,11 +297,27 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Centered Breezo logo header (responsive)
+# Centered Breezo logo header using inline base64 to ensure rendering
 st.markdown(
-    """
-    <div style="width:100%; display:flex; justify-content:center; align-items:center; margin: 4px 0 12px 0;">
-        <img src="breezologo.png" alt="Breezo" style="display:block; margin:0 auto; max-width:320px; width:80%; height:auto;">
+    f"""
+    <div style="
+        width: 100%;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 4px 0 12px 0;
+    ">
+        <img src="data:image/png;base64,{LOGO_B64}"
+             alt="Breezo"
+             style="
+                display: block;
+                margin: 0 auto;
+                max-width: 320px;
+                width: 80%;
+                max-height: 100%;
+                object-fit: contain;
+             ">
     </div>
     """,
     unsafe_allow_html=True,
