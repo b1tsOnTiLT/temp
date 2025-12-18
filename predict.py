@@ -5,7 +5,7 @@ import joblib
 import asyncio
 import time
 import matplotlib.pyplot as plt
-
+import xgboost as xgb
 
 class Predictor():
     def __init__(self,lat,lon):
@@ -26,8 +26,9 @@ class Predictor():
         
     
     def build_model(self,poll,time_step):
-        path=f'./model_og/model_{poll}_t+{time_step}.pkl'
-        model=joblib.load(path)
+        path=f'./model_og/model_{poll}_t+{time_step}.json'
+        model=xgb.Booster({'nthread': 4})  # init model
+        model.load_model(path)  # load model data
         return model
     
     def predict_pm25(self):
@@ -38,14 +39,14 @@ class Predictor():
         for time_step in range(1,9):
             model=self.build_model('pm25',time_step)
             
-            final_feats=model.feature_names_in_
+            final_feats=model.feature_names
             final_feats=list(final_feats)  
             dic={}
             for i in final_feats:
                 dic[i]=self.pm25_dic.get(i,np.nan)
 
             X_train=pd.DataFrame(dic,index=[0])
-            predictions=model.predict(X_train)
+            predictions=model.predict(xgb.DMatrix(X_train))
             if time_step!=8:
                 self.pm25_dic[f'Predictions t+{time_step}']=predictions
             
@@ -66,13 +67,13 @@ class Predictor():
         for time_step in range(1,9):
             model=self.build_model('pm10',time_step)
            
-            final_feats=model.feature_names_in_
+            final_feats=model.feature_names
             final_feats=list(final_feats)  
             dic={}
             for i in final_feats:
                 dic[i]=self.pm10_dic.get(i,np.nan)
             X_train=pd.DataFrame(dic,index=[0])
-            predictions=model.predict(X_train)
+            predictions=model.predict(xgb.DMatrix(X_train))
             if time_step!=8:
                 self.pm10_dic[f'Predictions t+{time_step}']=predictions[0]
             if time_step not in self.predictions_dic:
